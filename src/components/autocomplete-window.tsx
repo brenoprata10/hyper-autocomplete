@@ -20,6 +20,7 @@ export class AutocompleteWindow extends React.PureComponent<
   }
 
   render() {
+  	console.log({props: this.props})
     return this.props.suggestions.length < 1 ? (
       <div />
     ) : (

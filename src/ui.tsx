@@ -50,8 +50,9 @@ export const decorateTerm = (Term: any, something: any) => {
       if (!this.state.registered) {
         // TODO: Move this to the right lifecycle
         const term = this.getTerm();
+        console.log({term})
         if (term) {
-          this.getTerm().on("scroll", (scrollPosition: number) => {
+          this.getTerm().onScroll((scrollPosition: number) => {
             this.setState({ scrollPosition });
             this.handleLineChange();
           });
@@ -151,6 +152,7 @@ export const decorateTerm = (Term: any, something: any) => {
     }
 
     render() {
+    	console.log('chamei')
       return (
         <div
           ref={divElement => (this.divElement = divElement)}

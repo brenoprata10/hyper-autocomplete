@@ -39,8 +39,10 @@ export const updateSuggestions = (
   }
   console.log(context)
   if (context.currentUserInput.length) {
-    autocomplete(context, cachedProviders).then(suggestions =>
-      dispatch(setSuggestionsAction(uid, suggestions))
+    autocomplete(context, cachedProviders).then(suggestions => {
+    	console.log({suggestions})
+		    dispatch(setSuggestionsAction(uid, suggestions))
+	    }
     );
   } else {
     dispatch(setSuggestionsAction(uid, []));
