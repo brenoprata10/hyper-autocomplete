@@ -15,6 +15,12 @@ import {
 } from "./actions";
 import { setCwd, updateSuggestions } from "./effects";
 import { deleteCharAt, deleteWordAt } from "../common/string";
+import {
+  Autocomplete,
+  AutocompleteContext,
+  AutocompleteSessionsState,
+  AutocompleteState
+} from "../models/autocomplete.types";
 /** INIT STATE */
 
 const initState: Autocomplete = {
@@ -164,7 +170,7 @@ export const reduceSessions = (
       const command = fullCommand[0];
       const merged = {
         ...session,
-        argument: undefined,
+        argument: undefined as any,
         argumentList,
         command
       };

@@ -1,6 +1,8 @@
 import * as React from "react";
 import { AutocompleteWindow } from "./components/autocomplete-window";
 import { uiChangeAction } from "./store/actions";
+import { CursorPosition } from "./models/cursor-position.types";
+import { AutocompleteContext } from "./models/autocomplete.types";
 
 interface UIProps {
   uid: string;
@@ -23,11 +25,12 @@ interface State {
   registered: boolean;
 }
 
-export const decorateTerm = (Term: any, something: any) => {
+export const decorateTerm = (Term: any) => {
+  // eslint-disable-next-line react/display-name
   const Component = class extends React.Component<UIProps, State> {
     divElement: HTMLDivElement | null = null;
 
-    constructor(props: any) {
+    constructor(props: UIProps) {
       super(props);
     }
 
@@ -50,7 +53,7 @@ export const decorateTerm = (Term: any, something: any) => {
       if (!this.state.registered) {
         // TODO: Move this to the right lifecycle
         const term = this.getTerm();
-        console.log({term})
+        console.log({ term });
         if (term) {
           this.getTerm().onScroll((scrollPosition: number) => {
             this.setState({ scrollPosition });
@@ -152,7 +155,7 @@ export const decorateTerm = (Term: any, something: any) => {
     }
 
     render() {
-    	console.log('chamei')
+      console.log("chamei");
       return (
         <div
           ref={divElement => (this.divElement = divElement)}

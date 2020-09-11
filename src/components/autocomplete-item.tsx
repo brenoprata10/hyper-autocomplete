@@ -1,5 +1,6 @@
 import React from "react";
 import { ui } from "../common/ui";
+import { Suggestion } from "../models/autocomplete.types";
 
 interface AutocompleteItemProps {
   onClick?: () => void;

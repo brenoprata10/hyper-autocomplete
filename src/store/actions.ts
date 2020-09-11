@@ -1,3 +1,6 @@
+import { Suggestion } from "../models/autocomplete.types";
+import { CursorPosition } from "../models/cursor-position.types";
+
 export enum HyperActionTypes {
   Init = "INIT",
   SetXTermTitle = "SESSION_SET_XTERM_TITLE",

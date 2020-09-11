@@ -3,6 +3,7 @@ import { FuseResultWithMatches } from "fuse.js";
 
 type FuseResultWithHighlight<T, F extends FuseResultWithMatches<T>> = F & {
   highlights: { [key in keyof T]?: React.ReactNode };
+  score?: number;
 };
 
 export const fuseWithHighlights = <
@@ -15,15 +16,15 @@ export const fuseWithHighlights = <
     return {
       ...resultItem,
       highlights: (resultItem.matches as FuseMatches<T>).reduce<
-        (FuseResultWithHighlight<T, F>)["highlights"]
+        FuseResultWithHighlight<T, F>["highlights"]
       >((prev, matchItem) => {
-        var text = resultItem.item[matchItem.key] as string;
-        var result = [];
-        var matches = ([] as [number, number][]).concat(matchItem.indices); // limpar referencia
-        var pair = matches.shift();
+        const text = (resultItem.item[matchItem.key] as unknown) as string;
+        const result = [];
+        const matches = ([] as [number, number][]).concat(matchItem.indices); // limpar referencia
+        let pair = matches.shift();
 
-        for (var i = 0; i < text.length; i++) {
-          var char = text.charAt(i);
+        for (let i = 0; i < text.length; i++) {
+          const char = text.charAt(i);
           if (pair && i == pair[0]) {
             result.push("<b>");
           }

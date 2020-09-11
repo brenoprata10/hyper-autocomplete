@@ -1,5 +1,9 @@
 import { join, normalize, basename, dirname } from "path";
 import { io } from "../../common/io";
+import {
+  AutocompleteProvider,
+  Suggestion
+} from "../../models/autocomplete.types";
 
 export const fileAutocompletionProvider: AutocompleteProvider = async ({
   cwd,
@@ -18,7 +22,7 @@ export const fileAutocompletionProvider: AutocompleteProvider = async ({
   return await Promise.all(
     files.map<Promise<Suggestion>>(async file => {
       const isDir = file.stat.isDirectory();
-      file.stat.mode
+      file.stat.mode;
       const kind = isDir
         ? "Directory"
         : (await io.canExecute(file.path))
@@ -28,7 +32,7 @@ export const fileAutocompletionProvider: AutocompleteProvider = async ({
       return {
         label: file.name,
         kind
-      };
+      } as Suggestion;
     })
   );
 };

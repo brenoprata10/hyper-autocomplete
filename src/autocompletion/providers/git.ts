@@ -10,12 +10,15 @@ import {
 } from "../../common/shell";
 import {
   longFlag,
-  shortFlag,
   combineProviders,
   staticProvider,
   commandWithSubcommands
 } from "../../common/provider";
-import { ui } from "../../common/ui";
+import {
+  AutocompleteProvider,
+  SubcommandConfig,
+  Suggestion
+} from "../../models/autocomplete.types";
 
 export class Branch {
   constructor(private refName: string, private _isCurrent: boolean) {}

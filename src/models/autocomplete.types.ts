@@ -1,4 +1,6 @@
-interface Suggestion {
+import { CursorPosition } from "./cursor-position.types";
+
+export interface Suggestion {
   label: string;
   kind?: "Function" | "File" | "Directory" | "Executable" | "Snippet";
   detail?: string;
@@ -9,7 +11,7 @@ interface Suggestion {
   highlightLabel?: React.ReactNode;
 }
 
-interface AutocompleteContext {
+export interface AutocompleteContext {
   column: number;
   splitPosition: number;
   scrollPosition: number;
@@ -25,25 +27,25 @@ interface AutocompleteContext {
   argumentList: string[];
 }
 
-interface Autocomplete {
+export interface Autocomplete {
   sessions: {
     [key: string]: AutocompleteContext | undefined;
   };
 }
 
-interface AutocompleteSessionsState {
+export interface AutocompleteSessionsState {
   autocomplete: Autocomplete;
 }
 
-interface AutocompleteState {
+export interface AutocompleteState {
   sessions: AutocompleteSessionsState;
 }
 
-type AutocompleteProvider = (
+export type AutocompleteProvider = (
   context: AutocompleteContext
 ) => Promise<Suggestion[]>;
 
-interface SubcommandConfig {
+export interface SubcommandConfig {
   name: string;
   detail?: string;
   provider?: AutocompleteProvider;

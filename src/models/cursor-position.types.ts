@@ -1,4 +1,4 @@
-interface CursorPosition {
+export interface CursorPosition {
   x: number;
   y: number;
   width: number;

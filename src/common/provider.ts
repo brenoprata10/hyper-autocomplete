@@ -1,3 +1,10 @@
+import {
+  AutocompleteContext,
+  AutocompleteProvider,
+  SubcommandConfig,
+  Suggestion
+} from "../models/autocomplete.types";
+
 export const staticProvider = (
   suggestions: Suggestion[]
 ): AutocompleteProvider => async _ => [...suggestions];

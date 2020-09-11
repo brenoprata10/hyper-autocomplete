@@ -1,9 +1,10 @@
-import { fileAutocompletionProvider } from "./providers/file";
-import { gitAutocompletionProvider } from "./providers/git";
-import { ui } from "../common/ui";
-import React from "react";
 import Fuse from "fuse.js";
 import { fuseWithHighlights } from "../common/fuse";
+import {
+  AutocompleteContext,
+  AutocompleteProvider,
+  Suggestion
+} from "../models/autocomplete.types";
 
 const fuse = new Fuse([] as Suggestion[], {
   keys: ["searchText", "label"],
@@ -52,7 +53,7 @@ export async function autocomplete(
       })
       .map(suggestion => ({
         ...suggestion.item,
-        highlightLabel: suggestion.highlights.label
+        highlightLabel: (suggestion.highlights as any).label
       }));
   } else {
     suggestions = suggestions.sort((a, b) => {

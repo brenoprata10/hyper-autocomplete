@@ -1,5 +1,7 @@
 import React from "react";
 import { AutocompleteItemComponent } from "./autocomplete-item";
+import { Suggestion } from "../models/autocomplete.types";
+import { CursorPosition } from "../models/cursor-position.types";
 
 interface AutocompleteWindowProps {
   config: HyperAutocompleteConfig;
@@ -20,7 +22,7 @@ export class AutocompleteWindow extends React.PureComponent<
   }
 
   render() {
-  	console.log({props: this.props})
+    console.log({ props: this.props });
     return this.props.suggestions.length < 1 ? (
       <div />
     ) : (
