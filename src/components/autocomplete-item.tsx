@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { ui } from "../common/ui";
 import { Suggestion } from "../models/autocomplete.types";
 
@@ -16,7 +16,6 @@ export class AutocompleteItemComponent extends React.PureComponent<
   AutocompleteItemProps,
   AutocompleteItemState
 > {
-  state: AutocompleteItemState = {};
   public static ITEM_HEIGHT_PX = 30;
 
   constructor(props: AutocompleteItemProps) {
@@ -51,35 +50,34 @@ export class AutocompleteItemComponent extends React.PureComponent<
   }
 
   render() {
+    const { onClick, suggestion, config } = this.props;
+    const wrapperStyle = {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      padding: "5px",
+      lineHeight: AutocompleteItemComponent.ITEM_HEIGHT_PX + "px",
+      minHeight: AutocompleteItemComponent.ITEM_HEIGHT_PX + "px",
+      whiteSpace: "nowrap",
+      textOverflow: "hidden"
+    } as CSSProperties;
+    const rowStyle = { display: "flex", alignItems: "center" };
     const Icon = this.state.icon;
     return (
-      <div
-        onClick={this.props.onClick}
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "5px",
-          lineHeight: AutocompleteItemComponent.ITEM_HEIGHT_PX + "px",
-          minHeight: AutocompleteItemComponent.ITEM_HEIGHT_PX + "px",
-          whiteSpace: "nowrap",
-          textOverflow: "hidden"
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center" }}>
+      <div onClick={onClick} style={wrapperStyle}>
+        <div style={rowStyle}>
           {Icon && <Icon style={{ marginRight: 10, width: 15, height: 15 }} />}
-          <span style={{ ...this.props.config.label, marginRight: 10 }}>
-            {this.props.suggestion.highlightLabel ||
-              this.props.suggestion.label}
+          <span style={{ ...config.label, marginRight: 10 }}>
+            {suggestion.highlightLabel || suggestion.label}
           </span>
         </div>
-        {this.props.suggestion.detail && (
+        {suggestion.detail && (
           <span
             style={{
-              ...this.props.config.detail
+              ...config.detail
             }}
           >
-            {this.props.suggestion.detail}
+            {suggestion.detail}
           </span>
         )}
       </div>
