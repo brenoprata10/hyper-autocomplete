@@ -5,6 +5,8 @@ export { middleware, reduceSessions } from "./store/reducer";
 
 import { getAutocomplete, getSessionByUid } from "./store/reducer";
 
+import "../assets/test.scss";
+
 export const mapTermsState = (
   state: HyperState & AutocompleteState,
   map: any

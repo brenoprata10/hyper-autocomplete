@@ -25,6 +25,7 @@ export class AutocompleteWindow extends React.PureComponent<
     }
     return (
       <div
+        className={'testing'}
         style={{
           position: "absolute",
           padding: padding,

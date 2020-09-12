@@ -20,6 +20,7 @@
     "@types/react-redux": "^7.1.7",
     "@types/strip-ansi": "^5.2.1",
     "color": "^3.0.0",
+    "css-loader": "^4.3.0",
     "fs-extra": "^8.1.0",
     "fuse.js": "^3.4.6",
     "klaw": "^3.0.0",
