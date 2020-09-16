@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { AutocompleteItemComponent } from "./autocomplete-item";
 import { Suggestion } from "../models/autocomplete.types";
 import { CursorPosition } from "../models/cursor-position.types";
@@ -19,32 +19,23 @@ export class AutocompleteWindow extends React.PureComponent<
 
   render() {
     const { suggestions, padding, config } = this.props;
+    const wrapperStyle = {
+      maxHeight: `${AutocompleteWindow.MAX_HEIGHT_PX}px`,
+      backgroundColor: config.backgroundColor,
+      flexDirection: this.shouldInvert() ? "column-reverse" : "column"
+    } as CSSProperties;
     console.log({ props: this.props });
     if (suggestions.length < 1) {
       return <div />;
     }
     return (
       <div
-        className={'testing'}
-        style={{
-          position: "absolute",
-          padding: padding,
-          zIndex: 4,
-          ...this.calcPosition()
-        }}
+        className={"autocomplete-window"}
+        style={{ padding, ...this.calcPosition() }}
       >
         <div
-          style={{
-            maxHeight: AutocompleteWindow.MAX_HEIGHT_PX + "px",
-            color: "white",
-            display: "flex",
-            overflowX: "hidden",
-            overflowY: "scroll",
-            backgroundColor: config.backgroundColor,
-            boxShadow:
-              "rgba(0, 0, 0, 0.12) 0px 0px 10px 3px, rgba(0, 0, 0, 0.08) 1px 4px 5px 2px",
-            flexDirection: this.shouldInvert() ? "column-reverse" : "column"
-          }}
+          className={"autocomplete-window-item-wrapper"}
+          style={wrapperStyle}
         >
           {suggestions.map(item => (
             <AutocompleteItemComponent

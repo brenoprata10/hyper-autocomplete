@@ -1,0 +1,12 @@
+.autocomplete-window {
+  position: absolute;
+  z-index: 4;
+}
+
+.autocomplete-window-item-wrapper {
+  color: white;
+  display: flex;
+  overflow-X: hidden;
+  overflow-Y: scroll;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 0 10px 3px, rgba(0, 0, 0, 0.08) 1px 4px 5px 2px;
+}

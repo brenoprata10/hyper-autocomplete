@@ -52,20 +52,17 @@ export class AutocompleteItemComponent extends React.PureComponent<
   render() {
     const { onClick, suggestion, config } = this.props;
     const wrapperStyle = {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      padding: "5px",
-      lineHeight: AutocompleteItemComponent.ITEM_HEIGHT_PX + "px",
-      minHeight: AutocompleteItemComponent.ITEM_HEIGHT_PX + "px",
-      whiteSpace: "nowrap",
-      textOverflow: "hidden"
+      lineHeight: `${AutocompleteItemComponent.ITEM_HEIGHT_PX}px`,
+      minHeight: `${AutocompleteItemComponent.ITEM_HEIGHT_PX}px`
     } as CSSProperties;
-    const rowStyle = { display: "flex", alignItems: "center" };
     const Icon = this.state.icon;
     return (
-      <div onClick={onClick} style={wrapperStyle}>
-        <div style={rowStyle}>
+      <div
+        onClick={onClick}
+        className={"autocomplete-item"}
+        style={wrapperStyle}
+      >
+        <div className={"autocomplete-item-row"}>
           {Icon && <Icon style={{ marginRight: 10, width: 15, height: 15 }} />}
           <span style={{ ...config.label, marginRight: 10 }}>
             {suggestion.highlightLabel || suggestion.label}
