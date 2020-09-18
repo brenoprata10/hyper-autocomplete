@@ -1,0 +1,1 @@
+yarn build & sass --watch assets:dist/assets

@@ -30,7 +30,13 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"]
+    extensions: [".tsx", ".ts", ".js"],
+    alias: {
+      react: path.resolve(path.join(__dirname, "./node_modules/react"))
+    }
+  },
+  externals: {
+    react: "react"
   },
   devtool: false,
   output: {

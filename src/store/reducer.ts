@@ -1,17 +1,17 @@
 import { keys } from "../utils";
 
 import {
-  resetInputAction,
   Actions,
-  HyperActionTypes,
   ActionTypes,
-  stopInputAction,
-  removeCharAction,
   addCharAction,
   commandSplitAction,
-  updateCommandAction,
   deleteLineAction,
-  deleteWordAction
+  deleteWordAction,
+  HyperActionTypes,
+  removeCharAction,
+  resetInputAction,
+  stopInputAction,
+  updateCommandAction
 } from "./actions";
 import { setCwd, updateSuggestions } from "./effects";
 import { deleteCharAt, deleteWordAt } from "../common/string";
@@ -21,9 +21,10 @@ import {
   AutocompleteSessionsState,
   AutocompleteState
 } from "../models/autocomplete.types";
+
 /** INIT STATE */
 
-const initState: Autocomplete = {
+export const initState: Autocomplete = {
   sessions: {}
 };
 
@@ -58,9 +59,10 @@ export const getSessionByUid = (
 /** REDUCERS */
 
 export const reduceSessions = (
-  state: HyperSessions & AutocompleteSessionsState,
+  state: HyperSessions & AutocompleteSessionsState & any,
   action: Actions
 ): HyperSessions & AutocompleteSessionsState => {
+  console.log({ state, action });
   switch (action.type) {
     case ActionTypes.SetCwd:
       return state.setIn(["autocomplete", "sessions", action.payload.uid], {
@@ -163,6 +165,19 @@ export const reduceSessions = (
             )
           });
     }
+    case ActionTypes.SetAutocompleteSuggestion: {
+      const session = getSessionByUid(state, action.payload.uid);
+      console.log({ state });
+      const ste = state.setIn([action.payload.uid], {
+        ...session,
+        currentUserInput: action.payload.suggestion.label,
+        currentLine: action.payload.suggestion.label,
+        command: action.payload.suggestion.label,
+        column: session.column
+      });
+      console.log({ newState: ste });
+      return ste;
+    }
     case ActionTypes.UpdateCommand: {
       const session = getSessionByUid(state, action.payload.uid);
       const fullCommand = session.currentUserInput.split(" ");
@@ -237,7 +252,12 @@ export const middleware = (store: any) => (
   next(action);
   const state: HyperState & AutocompleteState = store.getState();
   const activeUid = state.sessions.activeUid;
+  const { data } = action as any;
+  console.log({ data, action });
   switch (action.type) {
+    case ActionTypes.SetAutocompleteSuggestion: {
+      store.dispatch({ type: "TESTING" });
+    }
     case HyperActionTypes.SessionUserData: {
       const event = window.event as KeyboardEvent | undefined;
       console.log(event);
@@ -284,6 +304,7 @@ export const middleware = (store: any) => (
       break;
     }
   }
+  console.log({ middlewareState: state });
   switch (action.type) {
     /**
      * Cwd Actions
@@ -337,6 +358,7 @@ export const middleware = (store: any) => (
         action.payload.uid,
         getSessionByUid(state.sessions, action.payload.uid)
       );
+      store.dispatch({ type: "TESTING" });
       break;
   }
 };

@@ -10,7 +10,8 @@ export enum HyperActionTypes {
   SessionAddData = "SESSION_ADD_DATA",
   SessionPtyData = "SESSION_PTY_DATA",
   UiCommandExec = "UI_COMMAND_EXEC",
-  UiFontSizeSet = "UI_FONT_SIZE_SET"
+  UiFontSizeSet = "UI_FONT_SIZE_SET",
+  Testing = "Testing"
 }
 
 export enum ActionTypes {
@@ -28,7 +29,8 @@ export enum ActionTypes {
   // New Prompt
   UiChange = "UI_CHANGE",
   CommandSplit = "COMMAND_SPLIT",
-  UpdateCommand = "UPDATE_COMMAND"
+  UpdateCommand = "UPDATE_COMMAND",
+  SetAutocompleteSuggestion = "SET_AUTOCOMPLETE_SUGGESTION"
 }
 
 /** ACTION TYPES */
@@ -100,10 +102,19 @@ export interface UpdateCommandAction {
   };
 }
 
+export interface SetSuggestionAutocompleteAction {
+  type: ActionTypes.SetAutocompleteSuggestion;
+  payload: {
+    uid: string;
+    suggestion: Suggestion;
+  };
+}
+
 export type HyperActions =
   | { type: HyperActionTypes.SetXTermTitle; uid: string }
   | { type: HyperActionTypes.Init }
   | { type: HyperActionTypes.SessionUserData }
+  | { type: HyperActionTypes.Testing }
   | { type: HyperActionTypes.SessionAdd; pid: string }
   | { type: HyperActionTypes.SessionAddData; pid: string; data: string }
   | { type: HyperActionTypes.SessionPtyData; pid: string; data: string }
@@ -129,7 +140,8 @@ export type Actions =
   | SetSuggestionsAction
   | UiChangeAction
   | CommandSplitAction
-  | UpdateCommandAction;
+  | UpdateCommandAction
+  | SetSuggestionAutocompleteAction;
 
 /** ACTION CREATORS */
 
@@ -195,4 +207,12 @@ export const commandSplitAction = (uid: string): CommandSplitAction => ({
 export const updateCommandAction = (uid: string): UpdateCommandAction => ({
   type: ActionTypes.UpdateCommand,
   payload: { uid }
+});
+
+export const setAutocompleteSuggestion = (
+  uid: string,
+  suggestion: Suggestion
+): SetSuggestionAutocompleteAction => ({
+  type: ActionTypes.SetAutocompleteSuggestion,
+  payload: { uid, suggestion }
 });

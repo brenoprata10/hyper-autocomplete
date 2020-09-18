@@ -23,5 +23,16 @@ export const getTermGroupProps = (
 };
 
 export const getTermProps = (uid: string, parentProps: any, props: any) => {
-  return { ...props, context: getSessionByUid(parentProps, uid) };
+  return { ...props, context: getSessionByUid(parentProps, uid), parentProps };
+};
+
+// This reducer will trigger calls to the parent react store, we will need to add middleware detecting events and triggering data according to it
+exports.reduceUI = (state: any, action: any) => {
+  switch (action.type) {
+    case "TESTING":
+      console.log("testing stuff!!!");
+      // Toggle wow mode!
+      return state.set("testing", "testingaction");
+  }
+  return state;
 };

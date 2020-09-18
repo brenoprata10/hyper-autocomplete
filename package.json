@@ -17,14 +17,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/react-redux": "^7.1.7",
     "@types/strip-ansi": "^5.2.1",
     "color": "^3.0.0",
     "css-loader": "^4.3.0",
     "fs-extra": "^8.1.0",
     "fuse.js": "^3.4.6",
     "klaw": "^3.0.0",
-    "react": "^16.12.0",
     "strip-ansi": "^6.0.0",
     "vscode-icons-js": "^10.1.1"
   },
@@ -41,7 +39,8 @@
     "@types/jest": "^25.1.2",
     "@types/klaw": "^3.0.0",
     "@types/node": "^13.5.3",
-    "@types/react": "^16.4.11",
+    "@types/react": "16.9.49",
+    "@types/react-redux": "7.1.9",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^25.1.0",
     "babel-loader": "^8.0.6",
@@ -52,6 +51,8 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.5.3",
     "webpack": "^5.0.0-beta.13",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "react": "16.13.1",
+    "react-redux": "7.2.1"
   }
 }

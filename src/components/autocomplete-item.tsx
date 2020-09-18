@@ -3,7 +3,7 @@ import { ui } from "../common/ui";
 import { Suggestion } from "../models/autocomplete.types";
 
 interface AutocompleteItemProps {
-  onClick?: () => void;
+  onClick?: (suggestion: Suggestion) => void;
   config: HyperAutocompleteConfig;
   suggestion: Suggestion;
 }
@@ -58,7 +58,7 @@ export class AutocompleteItemComponent extends React.PureComponent<
     const Icon = this.state.icon;
     return (
       <div
-        onClick={onClick}
+        onClick={() => onClick(suggestion)}
         className={"autocomplete-item"}
         style={wrapperStyle}
       >
